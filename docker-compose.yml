@@ -1,0 +1,61 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - zsh_data:/root/zsh_data
+      - psysh_data:/root/.config/psysh
+    environment:
+      - APP_ENV=local
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - challenge
+
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: challenge
+      MYSQL_USER: challenge
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - challenge
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - challenge
+
+  node:
+    image: node:22-alpine
+    working_dir: /app
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+    command: sh -c "npm install && npm run dev"
+    depends_on:
+      - app
+    networks:
+      - challenge
+
+networks:
+  challenge:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  zsh_data:
+  psysh_data:
