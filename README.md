@@ -57,3 +57,8 @@ docker compose exec app php artisan migrate
 - API routes live in `routes/api.php`, controllers in `app/Http/Controllers/Api/`.
 - React pages live in `resources/js/pages/`, shadcn/ui components in `resources/js/components/ui/`.
 
+## Todo
+
+- User seeder
+- Api Endpoint Feature
+- Init Script (run composer install, npm install, migrations, seeder, ect)

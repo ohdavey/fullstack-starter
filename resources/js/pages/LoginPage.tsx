@@ -73,7 +73,7 @@ export default function LoginPage() {
                             <p className="text-sm text-destructive">{error}</p>
                         )}
                     </CardContent>
-                    <CardFooter className="flex flex-col gap-3">
+                    <CardFooter className="flex flex-col gap-3 pt-5">
                         <Button
                             type="submit"
                             className="w-full"
