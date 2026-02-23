@@ -17,7 +17,7 @@ RUN install-php-extensions \
     opcache \
     xdebug
 
-COPY docker/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+COPY docker/php/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -27,7 +27,7 @@ COPY . .
 
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-COPY docker/Caddyfile /etc/caddy/Caddyfile
+COPY docker/php/Caddyfile /etc/caddy/Caddyfile
 
 EXPOSE 8000
 
