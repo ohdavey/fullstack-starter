@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ config('app.name') }}</title>
+    <link rel="icon" type="image/x-icon" href="{{ env('APP_FAVICON_URL', '/favicon.ico') }}" />
     @viteReactRefresh
     @vite(['resources/js/main.tsx'])
 </head>
