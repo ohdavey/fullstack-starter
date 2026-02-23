@@ -59,6 +59,4 @@ docker compose exec app php artisan migrate
 
 ## Todo
 
-- User seeder
-- Api Endpoint Feature
 - Init Script (run composer install, npm install, migrations, seeder, ect)
