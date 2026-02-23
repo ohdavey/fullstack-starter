@@ -1,5 +1,5 @@
 {
-    "name": "betterhelp",
+    "name": "lareact",
     "dockerComposeFile": "../docker-compose.yml",
     "service": "app",
     "workspaceFolder": "/app",
