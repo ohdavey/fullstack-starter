@@ -26,8 +26,8 @@ class HealthController extends Controller
 
         return response()->json([
             'status' => 'ok',
-            'db'     => $db,
-            'redis'  => $redis,
+            'db' => $db,
+            'redis' => $redis,
         ], 200);
     }
 }

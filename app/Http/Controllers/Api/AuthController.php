@@ -12,13 +12,13 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validated = $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|max:255',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
         $existing = DB::select('SELECT id FROM users WHERE email = ?', [$validated['email']]);
-        if (!empty($existing)) {
+        if (! empty($existing)) {
             return response()->json(['error' => 'Email already in use.'], 422);
         }
 
@@ -34,20 +34,20 @@ class AuthController extends Controller
         $token = $userModel->createToken('api')->plainTextToken;
 
         return response()->json([
-            'data' => ['token' => $token, 'user' => $user]
+            'data' => ['token' => $token, 'user' => $user],
         ], 201);
     }
 
     public function login(Request $request)
     {
         $validated = $request->validate([
-            'email'    => 'required|email',
+            'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
         $rows = DB::select('SELECT * FROM users WHERE email = ?', [$validated['email']]);
 
-        if (empty($rows) || !Hash::check($validated['password'], $rows[0]->password)) {
+        if (empty($rows) || ! Hash::check($validated['password'], $rows[0]->password)) {
             return response()->json(['error' => 'Invalid credentials.'], 401);
         }
 
@@ -64,18 +64,19 @@ class AuthController extends Controller
         return response()->json([
             'data' => [
                 'token' => $token,
-                'user'  => [
-                    'id'    => $user->id,
-                    'name'  => $user->name,
+                'user' => [
+                    'id' => $user->id,
+                    'name' => $user->name,
                     'email' => $user->email,
                 ],
-            ]
+            ],
         ]);
     }
 
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
+
         return response()->json(['data' => 'Logged out.']);
     }
 

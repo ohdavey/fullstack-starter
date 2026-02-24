@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
     {
         $app = config('app.name');
         $name = "{$app} User";
-        $email = 'user@' . preg_replace('/\s+/', '', strtolower($app)) . '.com';
+        $email = 'user@'.preg_replace('/\s+/', '', strtolower($app)).'.com';
         $password = bcrypt('password');
 
         DB::insert(

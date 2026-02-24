@@ -2,16 +2,15 @@
 
 namespace Tests\Feature\Api;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class AuthControllerTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
-     * A basic test example.
+     * Test invalid user authentication.
      */
     public function test_invalid_user_auth(): void
     {
@@ -23,6 +22,9 @@ class AuthControllerTest extends TestCase
         $response->assertStatus(401);
     }
 
+    /**
+     * Test user registration and login.
+     */
     public function test_user_registration_and_login(): void
     {
         $user = [
